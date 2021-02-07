@@ -1,0 +1,46 @@
+\section{Esercizio 2 - Edit distance}
+È richiesta l'implementazione di un algoritmo che calcoli la distanza tra due stringhe s1 ed s2 prese in input. In particolare viene richiesta la realizzazione di due algoritmi. Entrambi gli algoritmi si basano su queste osservazioni:
+\begin{itemize}
+    \item se $|s1| = 0$, allora edit$\_$distance$(s1, s2) = |s2|$;
+    \item se $|s2| = 0$, allora edit$\_$distance$(s1, s2) = |s1|$;
+    \item altrimenti, siano:
+    \begin{itemize}
+        \item $d_{no-op}: \begin{cases} \text{edit\_distance}(rest(s1), rest(s2)) & \text{se } s_1[0] = s_2[0]\\$ 
+        $\infty & \text{altrimenti } \end{cases}$
+
+        \item $d_{canc}$: 1 + edit$\_$distance$(s1, rest(s2))$
+        \item $d_{ins}$: 1 + edit$\_$distance$(rest(s1), s2)$
+    \end{itemize}
+\end{itemize}
+Si ha: edit$\_$distance$(s1, s2) = min\{d_{no-op}, d_{canc}, d_{ins}\}$
+
+
+
+\subsection{Edit distance naive}
+Il primo algoritmo viene implementato ricorsivamente e segue in pieno le osservazioni descritte sopra. L'Implementazione in java è autoesplicativa.\newline Questa tipo di implementazione è ingenua;  calcola volta per volta l'edit distance di ogni sottostringa e questo la rende molto costoso dal punta di vista temporale: il limite superiore di questa soluzione è $O(k^n)$.
+
+\subsection{Edit distance con Dynamic Programming - Memoization}
+Proprio per la natura dell'algoritmo precedente, si può pensare ad un miglioramento attraverso l'uso della programmazione dinamica, che permette in caso siano presenti sottoproblemi ricorrenti, di velocizzare significativamente l'algoritmo.
+In particolare il secondo algoritmo utilizza la tecnica di memoization.\newline Infatti dopo un'analisi del grafo di esecuzione dell'algoritmo precedente, si può notare che ci sono molti valori di edit distance calcolati più volte. \newline Il secondo algoritmo sfruta proprio questo fatto e ogni volta che calcola salva, volta per volta, l'edit distance della sottosequenza calcolata in una matrice di dimensione $n \cdot m$ (con n ed m lunghezza delle due stringhe) e ritorna l'edit distance presente nell'ultima cella della matrice. Questa soluzione è asintoticamente ottima e ha tempo $O(n \cdot m)$.
+
+
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|c|c|}
+\hline
+\textbf{}       & \textbf{' '} & \textbf{v} & \textbf{vi} & \textbf{vin} & \textbf{vino} \\ \hline
+\textbf{' '}    & 0            & 1          & 2           & 3            & 4             \\ \hline
+\textbf{v}      & 1            & 0          & 1           & 2            & 3             \\ \hline
+\textbf{vi}     & 2            & 1          & 0           & 1            & 2             \\ \hline
+\textbf{vin}    & 3            & 2          & 1           & 0            & 1             \\ \hline
+\textbf{vina}   & 4            & 3          & 2           & 1            & 2             \\ \hline
+\textbf{vinai}  & 5            & 4          & 3           & 2            & 3             \\ \hline
+\textbf{vinaio} & 6            & 5          & 4           & 3            & \textbf{2}    \\ \hline
+\end{tabular}
+\caption*{Matrice di edit distance calcolata con DP}
+
+\end{table}
+
+
+\subsection{Considerazioni finali}
+Il tempo di esecuzione della seconda versione dell'algoritmo è notevolmente più veloce rispetto alla prima versione.\newline Dall'esecuzione dell'applicazione, abbiamo che il tempo di calcolo dell'edit distance per il dataset è di circa 23 secondi.\newline Un'eventuale esecuzione sullo stesso dataset con la versione senza memoization dell'algoritmo richiederebbe diversi ordini di tempo in più.

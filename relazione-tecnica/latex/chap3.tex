@@ -1,0 +1,18 @@
+\section{Esercizio 3 - Confronto tra Hash table e array statico }
+In questo esercizio viene richiesta l'implementazione della struttura dati hashmap in modo che possa accettare tipi di dati generici. \newline Inoltre è richiesta la misurazione dei tempi di caricamento di un dataset di prova nella struttura dati definita e in un array statico e la misurazione del get di 10.000.000 chiavi generate casualmente da entrambe le strutture dati.
+\subsection{Implementazione}
+La struttura dati implementata è un hashmap nella quale le collisioni sono gestite tramite concatenazione. In particolare, è definito un tipo di dato Node che permette di implementare una lista concatenata per ogni indice della tabella. La funzione di hash utilizzata è un semplice modulo sul numero di elementi della tabella.
+
+\subsection{Dati raccolti}
+L'array è un array statico di 6.321.078 elementi. Viene riordinato utilizzando l'algoritmo di quicksort che ha complessità temporale $\Theta(nlogn)$ nel caso medio, e i dati vengono recuperati attraverso l'algoritmo di ricerca binaria, sfruttando l'ordinamento dell'array.\newline\newline
+L'hash table ha una tabella di 6.321.078 elementi. Utilizza una funzione di hash modulo limitata dalla dimensione della tabella.\newline
+Gli elementi sono generati con un seme statico basato su un contatore, in modo da rendere la distribuzione delle chiavi e dei valori casuali, ma uguali ad ogni esecuzione.
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\textbf{}               & \textbf{Elementi presenti}        & \textbf{Elementi raccolti} & \textbf{T caricamento} & \textbf{T recupero} \\ \hline
+\textbf{Array ordinato} & \multirow{2}{*}{\textbf{6321078}} & \textbf{6321929}                  & \textbf{1.852}                & \textbf{4.950}             \\ \cline{1-1} \cline{3-5} 
+\textbf{Hash table}     &                                   & \textbf{6321929}                  & \textbf{1.910}                & \textbf{1.406}             \\ \hline
+\end{tabular}
+\end{table}

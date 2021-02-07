@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage[italian]{babel}
+\usepackage{pdfpages}
+\usepackage[utf8]{inputenc}
+\usepackage[a4paper, total={6.5in, 8in}]{geometry}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{comment}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{multirow}
+\usepackage{mathtools}
+
+
+\makeatletter
+% \@seccntformat is the command that adds the number to section titles
+% we make it a no-op
+\renewcommand{\@seccntformat}[1]{}
+\makeatother
+
+
+
+\title{Relazione Algoritmi e Strutture Dati 2019/20} 
+\author{Vannella Alessio}
+\date{}
+\begin{document}
+\maketitle
+\tableofcontents
+\begin{abstract}
+Questa breve relazione spiega le scelte progettuali attuate per la realizzazione del progetto didattico del corso di Algoritmi e Strutture dati dell'università di Torino nell'anno didattico 2019/2020. 
+\end{abstract}
+\vfill
+\subsubsection*{Note sui tempi misurati e sulla macchina utilizzata}
+Le misurazioni sono fatte su una macchina con le seguenti caratteristiche:
+\begin{itemize}
+    \item Processore: Intel Core i5-1035G1 1.00GHz;
+    \item Memoria principale : 24 GB;
+    \item Sistema operativo: Parrot 4.8;
+\end{itemize}
+I tempi nei programmi implementati in C sono calcolati attraverso la funzione clock() della libreria "time.h", che restituisce il tempo impiegato dalla cpu ad eseguire il processo. Per questo motivo, i tempi di attesa effettivi potrebbero essere diversi rispetto a quelli calcolati tramite questa funzione.\newline\newline
+I tempi nei programmi implementati in Java, invece, sono calcolati attraverso il metodo currentTimeMillis del package Java.lang.System che restituisce il timestamp del sistema al momento della chiamata. Quindi non si tratta del tempo di esecuzione del processo in cpu, ma del tempo effettivo atteso dall'utente.\newline\newline I tempi sono tutti misurati in secondi.
+\newpage
+
+\input{Chap1}
+
+\newpage
+
+\input{chap2}
+ 
+\newpage
+\input{chap3}
+
+\end{document}
+
